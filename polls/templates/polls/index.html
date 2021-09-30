@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      table,
+      th,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        padding-top: 10px;
+        padding-bottom: 20px;
+        padding-left: 30px;
+        padding-right: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Question List</h1>
+    <p>
+      <small>Click on question to vote , click Vote Count for results</small>
+    </p>
+
+    <table>
+      <tr>
+        <th>Question</th>
+        <th>Vote Count</th>
+      </tr>
+      {%for question in questions%}
+      <tr>
+        <td><a href="/polls/{{question.id}}/">{{question}}</a></td>
+        <td><a href="/polls/result/{{question.id}}/">Go!!</a></td>
+      </tr>
+      {%endfor%}
+    </table>
+  </body>
+</html>

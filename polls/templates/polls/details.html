@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>{{question}}</h1>
+    <form action="/polls/vote/{{question.id}}/" method="POST">
+      {%csrf_token%}
+      <ul>
+        <!-- select all choice for the particular question and print -->
+        {%for choice in question.choice_set.all %}
+        <!-- this sends the value as question.id when we hit the post request to the "polls/votes/" url -->
+        <!-- here every choice has different choice.id which tells  which choice is selected  throught input tag-->
+        <input type="radio" name="choice" value="{{choice.id}}" />
+        <!-- this displays the choices from choice table -->
+        {{choice.choice}} {%endfor%}
+        <button type="submit">Vote</button>
+      </ul>
+    </form>
+    <script>
+      document.write('<p><a href="' + document.referrer + '">Go Back</a></p>');
+    </script>
+  </body>
+</html>

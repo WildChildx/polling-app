@@ -1,0 +1,55 @@
+python manage.py shell
+Python 3.8.10 (default, Jun  2 2021, 10:49:15) 
+[GCC 9.4.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from polls.models import Quwstions
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+ImportError: cannot import name 'Quwstions' from 'polls.models' (/home/wildchild/Documents/eliteSoftwareInternship/django/mysite/polls/models.py)
+>>> from polls.models import Questions
+>>> Questions.objects.all()
+<QuerySet []>
+>>> q = Questions(question = "Do you like pune ?",pub_date = timezone.now())
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'timezone' is not defined
+>>> from django.utils import timezone
+>>> q = Questions(question = "Do you like pune ?",pub_date = timezone.now())
+>>> q.save()
+>>> Questions.objects.all()
+<QuerySet [<Questions: Questions object (1)>]>
+>>> Questions.objects.get(id=1)
+<Questions: Questions object (1)>
+>>> q = Questions.objects.get(id=1)
+>>> print(q)
+Questions object (1)
+>>> q.question
+'Do you like pune ?'
+>>> q.pub_date
+datetime.datetime(2021, 9, 28, 16, 16, 6, 442140, tzinfo=<UTC>)
+>>> questions = Questions.objects.all()
+>>> for question in questions:
+...     print(question)
+... 
+Questions object (1)
+>>> for question in questions:
+...     print(question.question_text)
+... 
+
+>>> for question in questions:
+...     print(question.question)
+... 
+Do you like pune ?
+>>> 
+
+>>> questions = Questions.objects.filter(pub_date__date=timezone.now())>>> 
+>>> questions
+<QuerySet [<Questions: Questions object (1)>]>
+
+>>> questions[0].question
+'Do you like pune ?'
+
+>>> print(questions.query)
+SELECT "polls_questions"."id", "polls_questions"."question", "polls_questions"."pub_date" FROM "polls_questions" WHERE django_datetime_cast_date("polls_questions"."pub_date", 'UTC', 'UTC') = 2021-09-28
+>>> 
